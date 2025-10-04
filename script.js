@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "/SOUNDCLOUD": { type: 'newtab', value: "https://soundcloud.com/darinkirksauvey/asitiwfse_041725" },
     "/TRASH": { type: 'redirect', value: "asitiwfse.html" },
     "/TOWER": { type: 'redirect', value: "tower.html" },
+    "/FISH": { type: 'redirect', value: "fish.html" },
     "/TOUR": { type: 'showdates', value: [
         { text: ">> UPCOMING TOUR DATES:" },
         { text: ">> REDACTED", link: "https://example.com/tickets/roxy" },

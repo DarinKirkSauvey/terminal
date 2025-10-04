@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>>>fish</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            color: limegreen; /* Set default text color for elements inside the player */
+            font-family: sans-serif; /* Or your desired font */
+        }
+
+        /* Hide the default audio controls */
+        audio {
+            display: none;
+        }
+
+        .audio-player {
+            width: 90%; /* Default width for mobile */
+            max-width: 600px; /* Max width for desktop */
+            /* Removed border: 1px solid limegreen; */
+            padding: 15px 0; /* Adjusted padding since no border */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            /* Removed border-radius */
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #playPauseBtn {
+            background-color: transparent;
+            border: none; /* Removed border */
+            color: limegreen;
+            padding: 5px; /* Adjusted padding for icon */
+            cursor: pointer;
+            margin-right: 10px;
+            border-radius: 50%; /* Make it round */
+            width: 40px; /* Set a fixed size for the button */
+            height: 40px; /* Set a fixed size for the button */
+            display: flex; /* Use flexbox for centering icon */
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s ease; /* Subtle hover transition */
+        }
+
+        #playPauseBtn:hover {
+            background-color: rgba(0, 255, 0, 0.1); /* Subtle hover effect */
+        }
+
+        /* Style for the SVG icons */
+        #playPauseBtn svg {
+            fill: currentColor; /* Use the button's color for the icon */
+            width: 100%; /* Make icon fill the button */
+            height: 100%; /* Make icon fill the button */
+        }
+
+        /* Hide one icon based on the button's state (using classes) */
+        #playPauseBtn .play-icon {
+            display: block; /* Show play icon by default */
+        }
+
+        #playPauseBtn .pause-icon {
+            display: none; /* Hide pause icon by default */
+        }
+
+        #playPauseBtn.playing .play-icon {
+             display: none; /* Hide play icon when playing */
+        }
+
+        #playPauseBtn.playing .pause-icon {
+             display: block; /* Show pause icon when playing */
+        }
+
+
+        .progress-bar-container {
+            flex-grow: 1; /* Allow the progress bar to take up available space */
+            height: 8px;
+            background-color: rgba(0, 255, 0, 0.2); /* Background of the progress bar track */
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%; /* Will be updated by JavaScript */
+            background-color: limegreen;
+            border-radius: 4px;
+            transition: width 0.1s linear; /* Smooth progress update */
+        }
+
+        #currentTime, #duration {
+            font-size: 0.9em;
+            white-space: nowrap; /* Prevent time displays from wrapping */
+        }
+
+        /* Media query for larger screens (desktop) */
+        @media (min-width: 768px) {
+            .audio-player {
+                width: 60%; /* Revert to original width for larger screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="audio-player">
+        <audio id="myAudio">
+            <source src="assets/audio/used 07.07.25.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div class="controls">
+            <button id="playPauseBtn">
+                 <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                 <svg class="pause-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 6h3v12H6zm9 0h3v12h-3z"/></svg>
+            </button>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+            <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('myAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressBarContainer = document.querySelector('.progress-bar-container');
+        const progressBar = document.querySelector('.progress-bar');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const durationSpan = document.getElementById('duration');
+
+        // Event listener for play/pause button
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        });
+
+        // Event listener when audio starts playing
+        audio.addEventListener('play', () => {
+            playPauseBtn.classList.add('playing');
+        });
+
+        // Event listener when audio is paused
+        audio.addEventListener('pause', () => {
+            playPauseBtn.classList.remove('playing');
+        });
+
+
+        // Event listener for time update
+        audio.addEventListener('timeupdate', () => {
+            if (!isNaN(audio.duration)) { // Check if duration is a valid number
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = progress + '%';
+                currentTimeSpan.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        // Event listener when audio metadata is loaded (for duration)
+        audio.addEventListener('loadedmetadata', () => {
+             if (!isNaN(audio.duration)) { // Check if duration is a valid number
+                durationSpan.textContent = formatTime(audio.duration);
+             } else {
+                 durationSpan.textContent = 'Loading...'; // Handle cases where duration is not immediately available
+             }
+        });
+
+         // Also update duration when canplaythrough event fires
+        audio.addEventListener('canplaythrough', () => {
+             if (!isNaN(audio.duration)) { // Check if duration is a valid number
+                durationSpan.textContent = formatTime(audio.duration);
+             }
+        });
+
+         // Handle the case where the audio ends
+         audio.addEventListener('ended', () => {
+            playPauseBtn.classList.remove('playing'); // Switch to play icon
+            audio.currentTime = 0; // Reset to the beginning
+            progressBar.style.width = '0%'; // Reset progress bar
+            currentTimeSpan.textContent = '0:00'; // Reset current time
+         });
+
+
+        // Function to format time (seconds to mm:ss)
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            const formattedSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
+            return `${minutes}:${formattedSeconds}`;
+        }
+
+        // Event listener for clicking on the progress bar to seek
+        progressBarContainer.addEventListener('click', (e) => {
+            if (!isNaN(audio.duration)) { // Only seek if duration is known
+                const clickPosition = e.offsetX; // Get the click position relative to the container
+                const containerWidth = progressBarContainer.offsetWidth;
+                const seekTime = (clickPosition / containerWidth) * audio.duration;
+                audio.currentTime = seekTime;
+            }
+        });
+
+    </script>
+
+</body>
+</html>
