@@ -37,32 +37,32 @@ document.addEventListener('DOMContentLoaded', () => {
     "/TOWER": { type: 'redirect', value: "tower.html" },
     "/FISH": { type: 'redirect', value: "fish.html" },
     "/TOUR": { type: 'showdates', value: [
-        { text: ">> UPCOMING TOUR DATES:" },
-        { text: ">> REDACTED", link: "https://example.com/tickets/roxy" },
-        { text: ">> REDACTED", link: "https://example.com/tickets/fillmore" },
-        { text: ">> REDACTED", link: "https://example.com/tickets/houseofblues" }
+        { text: "► UPCOMING TOUR DATES:" },
+        { text: "► REDACTED", link: "https://example.com/tickets/roxy" },
+        { text: "► REDACTED", link: "https://example.com/tickets/fillmore" },
+        { text: "► REDACTED", link: "https://example.com/tickets/houseofblues" }
     ]},
     "/SHOWS": { type: 'showdates', value: [
-        { text: ">> UPCOMING SHOW DATES:" },
-        { text: ">> REDACTED", link: "https://example.com/tickets/roxy" },
-        { text: ">> REDACTED", link: "https://example.com/tickets/fillmore" },
-        { text: ">> REDACTED", link: "https://example.com/tickets/houseofblues" }
+        { text: "► UPCOMING SHOW DATES:" },
+        { text: "► REDACTED", link: "https://example.com/tickets/roxy" },
+        { text: "► REDACTED", link: "https://example.com/tickets/fillmore" },
+        { text: "► REDACTED", link: "https://example.com/tickets/houseofblues" }
     ]},
     "/INFO": { type: 'info', value: [
-        { text: ">> AVAILABLE COMMANDS:" },
-        { text: ">> /SIGNUP"},
-        { text: ">> /SHOWS" },           
-        { text: ">> /SPOTIFY" },
-        { text: ">> /INSTAGRAM" },
-        { text: ">> /TIKTOK" },
-        { text: ">> /TWITCH" },
-        { text: ">> /SOUNDCLOUD" },      
+        { text: "► AVAILABLE COMMANDS:" },
+        { text: "► /SIGNUP"},
+        { text: "► /SHOWS" },           
+        { text: "► /SPOTIFY" },
+        { text: "► /INSTAGRAM" },
+        { text: "► /TIKTOK" },
+        { text: "► /TWITCH" },
+        { text: "► /SOUNDCLOUD" },      
     ]},
     "/MORE": { type: 'showdates', value: [
-        { text: ">> ADDITIONAL DATES:" },
-        { text: ">> REDACTED", link: "https://example.com/tickets/observatory" },
-        { text: ">> REDACTED", link: "https://example.com/tickets/websterhall" },
-        { text: ">> REDACTED", link: "https://example.com/tickets/foxtheater" }
+        { text: "► ADDITIONAL DATES:" },
+        { text: "► REDACTED", link: "https://example.com/tickets/observatory" },
+        { text: "► REDACTED", link: "https://example.com/tickets/websterhall" },
+        { text: "► REDACTED", link: "https://example.com/tickets/foxtheater" }
     ]},
     "/SIGNUP": { type: 'signup' },
     "/DARTH_FENT": { type: 'redirect', value: 'darth_fent.html' },
@@ -72,12 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const startMessages = [
-    { text: ">> BOOTING..." },
-    { text: ">> PLEASE WAIT..." },
-    { text: ">> SIGNAL CONNECTED" },
-    { text: ">> ACCESS CODE REQUIRED" },
-    { text: ">> PLEASE ENTER ACCESS CODE" },
-    { text: ">> OR TYPE /INFO FOR MORE" }
+    { text: "► BOOTING..." },
+    { text: "► PLEASE WAIT..." },
+    { text: "► SIGNAL CONNECTED" },
+    { text: "► ACCESS CODE REQUIRED" },
+    { text: "► PLEASE ENTER ACCESS CODE" },
+    { text: "► OR TYPE /INFO FOR MORE" }
   ];
 
   const typingSpeed = 75;
@@ -154,17 +154,17 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ fields: { email: email } })
           }).then(() => {
-            typeMessage(">> ACCESS GRANTED\n", () => {
-              typeMessage(">> YOUR EMAIL HAS BEEN ADDED.\n");
+            typeMessage("► ACCESS GRANTED\n", () => {
+              typeMessage("► YOUR EMAIL HAS BEEN ADDED.\n");
             });
           }).catch(() => {
-            typeMessage(">> ERROR\n", () => {
-              typeMessage(">> ENTER ACCESS CODE\n");
+            typeMessage("► ERROR\n", () => {
+              typeMessage("► ENTER ACCESS CODE\n");
             });
           });
         } else {
-          typeMessage(">> INVALID\n", () => {
-            typeMessage(">> ENTER ACCESS CODE\n");
+          typeMessage("► INVALID\n", () => {
+            typeMessage("► ENTER ACCESS CODE\n");
           });
         }
         awaitingEmail = false;
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Handle /SIGNUP command
       if (userInput.toUpperCase() === "/SIGNUP") {
-        typeMessage(">> PLEASE ENTER YOUR EMAIL:\n", () => {
+        typeMessage("► PLEASE ENTER YOUR EMAIL:\n", () => {
           awaitingEmail = true;
           isSignupProcess = true;
           input.value = '';
@@ -192,14 +192,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (action) {
         if (action.type === 'newtab') {
-          typeMessage(">> " + "ACCESS GRANTED\n", () => {
+          typeMessage("► " + "ACCESS GRANTED\n", () => {
             setTimeout(() => {
               window.open(action.value, '_blank');
               showInput();
             }, 500);
           });
         } else if (action.type === 'redirect') {
-          typeMessage(">> " + "ACCESS GRANTED\n", () => {
+          typeMessage("► " + "ACCESS GRANTED\n", () => {
             setTimeout(() => {
               if (!isSignupProcess && cmd !== "/SIGNUP") {
                 window.location.href = action.value;
@@ -209,10 +209,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
           });
         } else if (action.type === 'showdates') {
-          typeMessage(">> " + "ACCESS GRANTED\n", () => {
+          typeMessage("► " + "ACCESS GRANTED\n", () => {
             typeMessages(action.value, () => {
               if (cmd === "/TOUR" || cmd === "/SHOWS") {
-                typeMessage(">> TYPE /MORE TO SEE MORE DATES\n", () => {
+                typeMessage("► TYPE /MORE TO SEE MORE DATES\n", () => {
                   output.textContent += '\n';
                   showInput();
                 });
@@ -222,21 +222,21 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           });
         } else if (action.type === 'info') {
-          typeMessage(">> " + "ACCESS GRANTED\n", () => {
+          typeMessage("► " + "ACCESS GRANTED\n", () => {
             typeMessages(action.value, showInput);
           });
         } else if (action.type === 'version') {
           // Handle /VERSION command
-          typeMessage(">> ACCESS GRANTED\n", () => {
+          typeMessage("► ACCESS GRANTED\n", () => {
             // Type out the version
-            typeMessage(`>> SITE VERSION: ${siteVersion}\n`, showInput);
+            typeMessage(`► SITE VERSION: ${siteVersion}\n`, showInput);
           });
         }
       } else {
         // unknown command
         // Changed here: add a newline for clarity
-        typeMessage(">> INCORRECT VALUE\n", () => {
-          typeMessage(">> PLEASE ENTER ACCESS CODE\n>> OR TYPE /INFO\n", () => {
+        typeMessage("► INCORRECT VALUE\n", () => {
+          typeMessage("► PLEASE ENTER ACCESS CODE\n>> OR TYPE /INFO\n", () => {
             output.textContent += '\n'; // optional, for extra spacing
             showInput();
           });
