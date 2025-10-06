@@ -247,6 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Start initial messages
+  // Start initial message
   typeMessages(startMessages, showInput);
 });
