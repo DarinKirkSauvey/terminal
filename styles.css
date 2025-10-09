@@ -1,50 +1,165 @@
-@font-face {
-    font-family: 'VCR OSD MONO';
-    src: url('assets/fonts/VCR_OSD_MONO.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+/* styles.css */
 
 body {
-    margin: 0;
-    background-color: black;
-    color: rgb(0, 255, 0);
-    font-family: 'VCR OSD MONO', monospace;
-    font-size: 2vw;
+  margin: 0;
+  background-color: black;
+  font-family: 'Press Start 2P', cursive;
+  color: #00ff00;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
 }
 
-/* Terminal container styling */
-#terminal {
-    padding: 5%;
-    max-width: 600px;
-    width: 90%;
-    margin: auto;
+/* Header styles */
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-/* Output display styling */
-#output {
-    white-space: pre;
-    overflow-wrap: break-word;
+/* Make all forms display as flex column for vertical stacking */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-/* Input field styling */
-#input {
-    background: black;
-    color: rgb(0, 255, 0);
-    border: none;
-    outline: none;
-    caret-color: rgb(0, 255, 0);
-    font-family: 'VCR OSD MONO', monospace;
-    font-size: inherit;
-    width: 100%;
-    margin-top: 10px;
+/* Style for input field */
+#code {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  border: 4px solid #00ff00;
+  background-color: black;
+  color: #00ff00;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  text-transform: uppercase;
+  outline: none;
+  /* Use monospace for block cursor effect */
+  font-family: 'Press Start 2P', monospace;
+  caret-color: #00ff00;
 }
 
-/* Responsive font size for smaller screens */
-@media (max-width: 768px) {
-    body { font-size: 3vw; }
+/* Placeholder styling (no visible placeholder) */
+#code::placeholder {
+  color: transparent;
 }
-@media (max-width: 480px) {
-    body { font-size: 4vw; }
-    #terminal { padding: 10%; }
+
+/* Style for submit button */
+button {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  border: 4px solid #00ff00;
+  background-color: black;
+  color: #00ff00;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+button:hover {
+  background-color: #00ff00;
+  color: black;
+}
+
+/* Style for links like tabs and back buttons */
+a {
+  display: inline-block;
+  width: 200px;
+  padding: 15px;
+  border: 4px solid #00ff00;
+  margin: 10px 0;
+  text-align: center;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #00ff00;
+  text-decoration: none;
+}
+a:hover {
+  background-color: #00ff00;
+  color: black;
+}
+
+/* Style for the back button specifically */
+.back-button {
+button {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  border: 4px solid #00ff00;
+  background-color: black;
+  color: #00ff00;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+button:hover {
+  background-color: #00ff00;
+  color: black;
+}
+
+/* ===========================
+   Styles for Artist Tabs
+   =========================== */
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Tabs buttons styled like existing site tabs */
+.tab-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  width: 200px;
+  padding: 15px;
+  border: 4px solid #00ff00;
+  background-color: black;
+  color: #00ff00;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.tab-button:hover {
+  background-color: #00ff00;
+  color: black;
+}
+
+/* Content sections for each artist, hidden by default */
+.tab-content {
+  display: none;
+  max-width: 800px;
+  padding: 20px;
+  border: 4px solid #00ff00;
+  background-color: black;
+  color: #00ff00;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+}
+
+/* Show active tab content */
+.tab-content.active {
+  display: block;
+}
+
 }

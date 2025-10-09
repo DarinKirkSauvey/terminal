@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>▷ dollar_bin</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>▷ ENTER_DB</title>
+<!-- Pixelated font from Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    background-color: black;
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .enter-screen {
+    cursor: pointer;
+    padding: 20px 40px;
+    border: 4px solid #00ff00;
+    color: #00ff00;
+    font-size: 24px;
+    text-shadow: 2px 2px #000;
+    transition: all 0.2s;
+  }
+
+  .enter-screen:hover {
+    background-color: #00ff00;
+    color: black;
+  }
+</style>
 </head>
 <body>
-    <div id="terminal">
-        <div id="output"></div>
-        <input type="text" id="input" autocomplete="off" />
-    </div>
-    <script src="script.js"></script>
+  <div class="enter-screen" onclick="location.href='menu.html'">ENTER</div>
 </body>
 </html>

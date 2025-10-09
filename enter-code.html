@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>▷ ENTER-CODE_DB</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+<!-- External CSS -->
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<h1>ENTER CODE</h1>
+<form id="codeForm" onsubmit="return checkCode();">
+  <input type="text" id="code" maxlength="20" />
+  <button type="submit">SUBMIT</button>
+</form>
+<a href="menu.html" style="display: block; text-align: center; margin-top: 30px;">BACK TO MENU</a>
+
+<script>
+  // Focus on the input box when page loads
+  document.getElementById('code').focus();
+
+  function checkCode() {
+    const inputField = document.getElementById('code');
+    const input = inputField.value.trim().toLowerCase();
+
+    // Check for valid codes and redirect accordingly
+    if (input === 'tower') {
+      window.location.href = 'tower.html';
+    } else if (input === 'darth fent') {
+      window.location.href = 'darth_fent.html';
+    } else if (input === 'fish') {
+      window.location.href = 'fish.html';
+    } else if (input === 'trash') {
+      window.location.href = 'trash.html';
+    } else if (input === 'ghandi') {
+      window.location.href = 'ghandi.html';
+    } else if (input === 'klinghoffer') {
+      window.location.href = 'klinghoffer.html';
+    } else {
+      // Wrong code: turn border red for 3 seconds
+      inputField.style.borderColor = 'red';
+
+      setTimeout(() => {
+        inputField.style.borderColor = '#00ff00'; // original color
+      }, 3000);
+    }
+    return false; // prevent default form submit
+  }
+</script>
+</body>
+</html>
