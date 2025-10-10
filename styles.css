@@ -93,22 +93,7 @@ a:hover {
 
 /* Style for the back button specifically */
 .back-button {
-button {
-  display: block;
-  width: 200px;
-  padding: 15px;
-  border: 4px solid #00ff00;
-  background-color: black;
-  color: #00ff00;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 10px;
-  cursor: pointer;
-  text-transform: uppercase;
-  margin-top: 20px;
-}
-button:hover {
-  background-color: #00ff00;
-  color: black;
+  /* No styles here; assuming you style it separately if needed */
 }
 
 /* ===========================
@@ -121,7 +106,6 @@ button:hover {
   align-items: center;
 }
 
-/* Tabs buttons styled like existing site tabs */
 .tab-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -149,7 +133,6 @@ button:hover {
   color: black;
 }
 
-/* Content sections for each artist, hidden by default */
 .tab-content {
   display: none;
   max-width: 800px;
@@ -161,9 +144,18 @@ button:hover {
   font-size: 10px;
 }
 
-/* Show active tab content */
 .tab-content.active {
   display: block;
 }
 
+/* ===========================
+   Image styling to make smaller and centered
+   =========================== */
+
+.main-image {
+  max-width: 400px; /* adjust as needed */
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto; /* centers the image horizontally and adds vertical spacing */
 }
